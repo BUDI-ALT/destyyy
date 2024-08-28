@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun</title>
+    <style>
+        @font-face {
+            font-family: 'New Amsterdam';
+            src: url('path/to/NewAmsterdam-Regular.woff2') format('woff2'),
+                 url('path/to/NewAmsterdam-Regular.woff') format('woff');
+        }
+
+        body {
+            font-family: 'New Amsterdam', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5a4a4, #f5d7d7);
+            position: relative;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            max-width: 90%;
+            text-align: center;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff6f61;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-family: 'New Amsterdam', cursive;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+        }
+
+        .birthday-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+            margin: 20px auto;
+            display: none;
+            transition: all 0.5s ease-in-out;
+        }
+
+        #continueButton {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            color: #fff;
+            background-color: #ff6f61;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+        }
+
+        #continueButton:hover {
+            background-color: #e94e77;
+            transform: scale(1.05);
+        }
+
+        .love-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            display: none;
+            z-index: 0;
+        }
+
+        .love {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-image: url('poto/love.jpg'); /* Ganti dengan path ke gambar hati */
+            background-size: cover;
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) translateX(50vw);
+                opacity: 0;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 2;
+            max-width: 300px;
+            animation: fadeIn 1s ease;
+        }
+
+        .notification img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .whatsapp-button {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease;
+        }
+
+        .whatsapp-button img {
+            width: 35px;
+            height: 35px;
+            margin: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <h1>Selamat Ulang Tahun🎂, SAYANG💖</h1>
+        <p>Semoga hari ini dan seterus nya menjadi hari paling berarti.</p>
+        <img src="poto/a5aee8cf-1b10-4ea0-b2d3-1685afa6a259.jpg" alt="Foto Ulang Tahun" class="birthday-photo" id="birthdayPhoto">
+        <button id="continueButton">Lanjut</button>
+    </div>
+
+    <div class="love-container" id="loveContainer"></div>
+
+    <div class="notification" id="notification">
+        <img src="poto/PESAN.gif" alt="Notifikasi">
+    </div>
+
+    <button class="whatsapp-button" id="whatsappButton" onclick="window.open('https://wa.me/+6281572121500', '_blank')">
+        <img src="poto/wa.jpg" alt="WhatsApp">
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let clickCount = 0;
+
+            document.getElementById('continueButton').addEventListener('click', function() {
+                clickCount++;
+                const photo = document.getElementById('birthdayPhoto');
+                const loveContainer = document.getElementById('loveContainer');
+                const notification = document.getElementById('notification');
+                const whatsappButton = document.getElementById('whatsappButton');
+
+                if (clickCount === 1) {
+                    photo.style.display = 'block';
+                    photo.style.transform = 'scale(1)';
+                    photo.style.opacity = '1';
+                } else if (clickCount === 2) {
+                    loveContainer.style.display = 'block';
+                    for (let i = 0; i < 20; i++) {
+                        const love = document.createElement('div');
+                        love.className = 'love';
+                        love.style.left = `${Math.random() * 100}%`;
+                        love.style.animationDelay = `${Math.random() * 5}s`;
+                        loveContainer.appendChild(love);
+                    }
+                } else if (clickCount === 3) {
+                    loveContainer.style.display = 'none';
+                    notification.style.display = 'block';
+                } else if (clickCount === 4) {
+                    notification.style.display = 'none';
+                    whatsappButton.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
